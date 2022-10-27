@@ -20,7 +20,7 @@ trait HasRoles {
 	}
 	
 
-	public function hasRole ($rolem $key = 'id') {
+	public function hasRole ($role, $key = 'id') {
 		
 		$role = trim ($role);
 		
