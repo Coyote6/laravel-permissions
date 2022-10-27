@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Livewire;
 
-class PermissionServiceProvider extends ServiceProvider {
+class PermissionsServiceProvider extends ServiceProvider {
 	
 	use ServiceProviderSeedsDb;
 	
