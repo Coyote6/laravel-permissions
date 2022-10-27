@@ -18,7 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Coyote6\\LaravelPermissions\\": "src/"
+            "Coyote6\\LaravelPermissions\\": "src/",
+            "Coyote6\\LaravelPermissions\\Database\\Seeders\\": "src/Resources/database/seeders/"
         }
     },
     "extra": {

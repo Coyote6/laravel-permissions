@@ -1,6 +1,6 @@
 <?php
 
-namespace Coyote6\LaravelPermissions\Resources\Database\Seeders;
+namespace Coyote6\LaravelPermissions\Database\Seeders;
 
 
 use Coyote6\LaravelBase\Traits\ReadsCsv;
