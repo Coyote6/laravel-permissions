@@ -1,0 +1,5 @@
+"role_id","permission_id"
+"authenticated","create_own_user_profile"
+"authenticated","delete_own_user_profile"
+"authenticated","view_own_user_profile"
+"authenticated","view_own_user_profile"
