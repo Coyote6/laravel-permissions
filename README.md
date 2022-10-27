@@ -43,7 +43,9 @@ $u = User::find(1);
 $u->addRole('administrator');
 ```
 (Working on a better method)
+
 6. Once your admin user has the administrator role you and if using the coyote6/laravel-crud package, go to the '/admin/users' on your site and manage any additional roles from there.
+
 7. To create permissions and roles, and add permissions to roles you can use the following code example:
 ```php
 use Coyote6\LaravelPermissions\Models\Permissions;
@@ -56,6 +58,7 @@ $role->addPermission($permission);
 
 ```
 Or if using the coyote6/laravel-crud package, go to the a '/admin/users/permissions' and '/admin/users/roles' respectively on the site.
+
 8. Add permission code to policies:
 ```php 
 class ExamplePolicy {
@@ -89,7 +92,10 @@ class ExamplePolicy {
 	}
 }
 ```
-9. Add permission code to templates via blade directives
+9. Add permission code as needed to templates via blade directives.
+
+## Blade Directives
+
 ### User Can - Permission Id(s)
 ```php
 <div>
