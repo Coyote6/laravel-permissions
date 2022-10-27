@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-	    "coyote6\laravel-base": "*"
+	    "coyote6/laravel-base": "*"
     },
     "autoload": {
         "psr-4": {
