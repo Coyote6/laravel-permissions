@@ -1,7 +1,7 @@
 {
     "name": "coyote6/laravel-permissions",
     "type": "library",
-    "description": "Provides permission and role models to assign to your users.  If using with coyote6\laravel-crud then admin pages are automatically added.",
+    "description": "Provides permission and role models to assign to your users. If using with coyote6\\laravel-crud then admin pages are automatically added.",
     "keywords": ["laravel","permissions", "roles"],
     "homepage": "https://coyote6.com",
     "license": "MIT",
