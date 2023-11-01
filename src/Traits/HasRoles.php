@@ -254,7 +254,10 @@ trait HasRoles {
 				if ($p instanceof Permission) {
 					$ps[] = $p;
 				}
-				else {
+				else if (is_string ($p)) {
+					if ($key == 'id') {
+						$p = createMachineName ($p);
+					}
 					$permission = Permission::where($key, $p)->first();
 					if ($permission) {
 						$ps[] = $permission;
@@ -263,8 +266,11 @@ trait HasRoles {
 			}
 		}
 		else if (is_string ($permissions) && $permissions != '') {
-			foreach (explode('|', $permissions) as $permission) {
-				$permission = Permission::where ($key, $permission)->first();
+			foreach (explode('|', $permissions) as $p) {
+				if ($key == 'id') {
+					$p = createMachineName ($p);
+				}
+				$permission = Permission::where ($key, $p)->first();
 				if ($permission) {
 					$ps[] = $permission;
 				}
