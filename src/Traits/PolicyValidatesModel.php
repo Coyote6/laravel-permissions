@@ -9,44 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 trait PolicyValidatesModel {
 	
-	//
-	// Model Permission Name
-	//
-	// @prop $modelPermissionName - string
-	//
-	// The $modelPermissionName property is used to find the permissions needed to
-	// determine if the user has permission.  It is the main word(s) in the permission
-	// name, without the action. For example:
-	//
-	// In the permission following permissions 'create models', 'edit models', and
-	// 'delete models' the $modelPermissionName would be 'models' and the action words
-	// would be 'create', 'edit', 'delete'.
-	//
-	// A standard policy has the following actions:
-	// administer
-	// create
-	// edit
-	// delete
-	// view
-	// search
-	//
-	// @return string
-	//
-	public function getModelPermissionName (): string {
-		
-		if (
-			property_exists ($this, 'modelPermissionName') &&
-			is_string ($this->modelPermissionName) &&
-			$this->modelPermissionName != ''
-		) {
-			return $this->modelPermissionName;
-		}
-		else {
-			trigger_error ('Please be sure to set the $modelPermissionName property on the ' . __CLASS__ . ' policy.');
-		}
-			
-	}
-	
 	
 	//
 	// Autodetect Policy
@@ -87,6 +49,7 @@ trait PolicyValidatesModel {
 	// @see $this->modelTypeIsValid()
 	//
 	// @return string
+	//
 	public function getModelClass (): string {
 		if (!property_exists ($this, 'modelClass')) {
 			trigger_error ('The $modelClass property must be set to use the StandardPolicy trait if autoDetectPolicy is set to false.');

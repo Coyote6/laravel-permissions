@@ -31,7 +31,7 @@ trait StandardAuthorPolicy {
 		
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ('view_' . $this->getModelPermissionName()) ||
+			$user->hasPermission ($this->getViewPrefix() . $this->getModelPermissionName()) ||
 			$this->isOwner($user, $model)
 		) {
 			return true;
@@ -52,7 +52,7 @@ trait StandardAuthorPolicy {
 		
 		if (
 			$this->administer ($user) ||
-			$user->hasPermission ('edit_' . $this->getModelPermissionName()) ||
+			$user->hasPermission ($this->getUpdatePrefix() . $this->getModelPermissionName()) ||
 			$this->isOwner($user, $model)
 		 ) {
 			return true;
@@ -74,7 +74,7 @@ trait StandardAuthorPolicy {
 		
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ('delete_' . $this->getModelPermissionName()) ||
+			$user->hasPermission ($this->getDeletePrefix() . $this->getModelPermissionName()) ||
 			$this->isOwner($user, $model)
 		) {
 			return true;

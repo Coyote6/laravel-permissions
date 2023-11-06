@@ -2,7 +2,6 @@
 
 namespace Coyote6\LaravelPermissions\Traits;
 
-
 use App\Models\User;
 
 use Coyote6\LaravelPermissions\Traits\AdminAccessTrait;
@@ -18,6 +17,39 @@ trait StandardAuthorOrClientPolicy {
 	use StandardPolicy,
 		PolicyChecksOwner,
 		PolicyChecksClientOwner;
+		
+		
+	public function administerClient (User $user): bool {
+		if (
+			$this->administer ($user) || 
+			$user->hasPermission ($this->getAdministerClientPrefix() . $this->getModelPermissionName())
+		) {
+			return true;
+		}
+		return false;
+	}
+		
+	
+	public function viewClientCrud (User $user): bool {
+		if (
+			$this->administer ($user) || 
+			$user->hasPermission ($this->getViewClientPrefix() . $this->getModelPermissionName())
+		) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public function searchClient (User $user): bool {
+		if (
+			$this->administer ($user) || 
+			$user->hasPermission ($this->getSearchClientPrefix() . $this->getModelPermissionName())
+		) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 	public function view (User $user, Model $model): bool {
@@ -28,10 +60,11 @@ trait StandardAuthorOrClientPolicy {
 		
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ('view_' . $this->getModelPermissionName()) ||
+			$user->hasPermission ($this->getViewPrefix() . $this->getModelPermissionName()) ||
 			$this->isOwner ($user, $model) ||
 			(
-				$this->isOwnedByClient ($user, $model) && $user->hasPermission ('view_clients_' . $this->getModelPermissionName())
+				$this->isOwnedByClient ($user, $model) && 
+				$user->hasPermission ($this->getViewClientPrefix() . $this->getModelPermissionName())
 			)
 		) {
 			return true;
@@ -48,10 +81,11 @@ trait StandardAuthorOrClientPolicy {
 		
 		if (
 			$this->administer ($user) ||
-			$user->hasPermission ('edit_' . $this->getModelPermissionName()) ||
+			$user->hasPermission ($this->getUpdatePrefix() . $this->getModelPermissionName()) ||
 			$this->isOwner ($user, $model) ||
 			(
-				$this->isOwnedByClient ($user, $model) && $user->hasPermission ('edit_clients_' . $this->getModelPermissionName())
+				$this->isOwnedByClient ($user, $model) && 
+				$user->hasPermission ($this->getUpdateClientPrefix() . $this->getModelPermissionName())
 			)
 		 ) {
 			return true;
@@ -68,10 +102,11 @@ trait StandardAuthorOrClientPolicy {
 		
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ('delete_' . $this->getModelPermissionName()) ||
+			$user->hasPermission ($this->getDeletePrefix() . $this->getModelPermissionName()) ||
 			$this->isOwner ($user, $model) ||
 			(
-				$this->isOwnedByClient ($user, $model) && $user->hasPermission ('delete_clients_' . $this->getModelPermissionName())
+				$this->isOwnedByClient ($user, $model) && 
+				$user->hasPermission ($this->getDeleteClientPrefix() . $this->getModelPermissionName())
 			)
 		) {
 			return true;
