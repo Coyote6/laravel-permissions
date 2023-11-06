@@ -188,8 +188,7 @@ To use these Policy traits, you attach the trait to your policy and write the na
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\Model;
+
 use App\Traits\StandardPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
