@@ -14,13 +14,13 @@ class CreateRolePermissionsTable extends Migration {
 	public function up() {
 		Schema::create('role_permissions', function (Blueprint $table) {
 			
-			$table->uuid('role_id');
-			$table->string('permission_id');
+			$table->string('role_id', 95);
+			$table->string('permission_id',95);
 			
 			$table->primary(['role_id','permission_id']);
 			
-			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-			$table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade')->onUpdate('cascade');
 			
 		});
 	}

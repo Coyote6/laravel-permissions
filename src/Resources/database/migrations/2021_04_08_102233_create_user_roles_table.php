@@ -15,12 +15,12 @@ class CreateUserRolesTable extends Migration {
 		Schema::create('user_roles', function (Blueprint $table) {
 			
 			$table->uuid('user_id');
-			$table->string('role_id');
+			$table->string ('role_id', 95);
 			
 			$table->primary(['user_id', 'role_id']);
 			
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
 			
 		});
 	}

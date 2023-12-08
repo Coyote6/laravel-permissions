@@ -54,7 +54,7 @@ trait HasPermissions {
 	public function addPermission ($permission, string $key = 'id') {
 		
 		if ($permission instanceof Permission) {
-		    $this->permissions()->save ($permission);
+			$this->permissions()->save ($permission);
 		}
 		else if (is_string ($permission) && $permission != '') {
 			$o = Permission::where($key, $permission)->first();
@@ -108,7 +108,7 @@ trait HasPermissions {
 	public function removePermission ($permission, string $key = 'id') {
 		
 		if ($permission instanceof Permission) {
-		    $this->permissions()->detach ($permission);
+			$this->permissions()->detach ($permission);
 		}
 		else if (is_string ($permission) && $permission != '') {
 			if ($key == static::permissionKeyName()) {
@@ -175,6 +175,64 @@ trait HasPermissions {
 		return $this->permissions->mapWithKeys (function ($perm) {
 			return [$perm->getKey() => $perm->name];
 		})->toArray();
+	}
+	
+	public function hasPermission ($permissions, string $key = 'id') {
+		
+		if ($this->id == 'administrator') {
+			return true;
+		}
+		
+		$ps = [];  
+		if (is_array ($permissions)) {
+			foreach ($permissions as $p) {
+				if ($p instanceof Permission) {
+					$ps[] = $p;
+				}
+				else if (is_string ($p)) {
+					if ($key == 'id') {
+						$p = createMachineName ($p);
+					}
+					$permission = Permission::where($key, $p)->first();
+					if ($permission) {
+						$ps[] = $permission;
+					}
+				}
+			}
+		}
+		else if (is_string ($permissions) && $permissions != '') {
+			foreach (explode('|', $permissions) as $p) {
+				if ($key == 'id') {
+					$p = createMachineName ($p);
+				}
+				$permission = Permission::where ($key, $p)->first();
+				if ($permission) {
+					$ps[] = $permission;
+				}
+			}
+		}
+		else if ($permissions instanceof Permission) {
+			$ps[] = $permissions;
+		}
+		else {
+			return false;
+		}
+	
+		// Loop through the permissions array and see
+		// if any of them contain the permission.
+		//
+		foreach ($ps as $permission) {
+			if ($this->permissions->contains ($permission)) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	
+	public function hasPermissionTo ($permission) {
+		return $this->hasPermission ($permission);
 	}
 
 }
