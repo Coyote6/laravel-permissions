@@ -6,21 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateRolePermissionsTable extends Migration {
 
+
+	public function getTableNames ():string {
+		return config('permissions.tables', 'role_permissions');
+	}
+	
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('role_permissions', function (Blueprint $table) {
+		$tables = $this->getTableNames();
+		Schema::create($tables['role_permissions'], function (Blueprint $table) use ($tables) {
 			
 			$table->string('role_id', 95);
 			$table->string('permission_id',95);
 			
 			$table->primary(['role_id','permission_id']);
 			
-			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
-			$table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('role_id')->references('id')->on($tables['roles'])->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('permission_id')->references('id')->on($tables['permissions'])->onDelete('cascade')->onUpdate('cascade');
 			
 		});
 	}
@@ -31,7 +37,8 @@ class CreateRolePermissionsTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists('role_permissions');
+		$tables = $this->getTableNames();
+		Schema::dropIfExists($tables['role_permissions']);
 	}
 
 }

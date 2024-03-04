@@ -32,6 +32,12 @@ class Permission extends Model {
 	    'id',
         'name'
     ];
+	
+	public function __construct (array $attributes = []) {	
+		parent::__construct($attributes);
+		$this->table = config('permissions.tables.permissions') ?: parent::getTable();
+	}
+
     
     public function roles () {
 		return $this->belongsToMany (Role::class,'role_permissions');

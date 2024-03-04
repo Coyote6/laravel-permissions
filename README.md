@@ -4,7 +4,20 @@ A package for managing permissions and user roles.
 
 ## To use
 1. Install require coyote6/laravel-permissions
-2. Run migrations (and seed if you want the default values) 
+2. Optional: publish config file if you wish to change database table names.
+
+Default names are:
+permissions
+roles
+role_permissions
+user_roles
+users 				// This needs to match your users table
+
+```
+php artisan vendor:publish --tag=permissions
+```
+
+3. Run migrations (and seed if you want the default values) 
 ```
 php artisan migrate
 ```
@@ -16,7 +29,7 @@ Or
 ```
 db::seed --class=Coyote6\LaravelPermissions\Resources\Databases\Seeders\PermissionsSeeder
 ```
-3. Add traits to the User model.
+4. Add traits to the User model.
 ```php
 use Coyote6\LaravelPermissions\Traits\HasRoles;
 use Coyote6\LaravelPermissions\Traits\UserRoles;
@@ -29,7 +42,7 @@ class User extends Authenticatable {
 
 }
 ```
-4. Add traits to all needed policies.
+5. Add traits to all needed policies.
 ```php
 use Coyote6\LaravelPermissions\Traits\AdminAccessTrait;
 
@@ -37,16 +50,16 @@ class ExamplePolicy {
 	use AdminAccessTrait;
 }	
 ```
-5. Add admin role to your admin user(s) via code:
+6. Add admin role to your admin user(s) via code:
 ```php
 $u = User::find(1);
 $u->addRole('administrator');
 ```
 (Working on a better method)
 
-6. Once your admin user has the administrator role you and if using the coyote6/laravel-crud package, go to the '/admin/users' on your site and manage any additional roles from there.
+7. Once your admin user has the administrator role you and if using the coyote6/laravel-crud package, go to the '/admin/users' on your site and manage any additional roles from there.
 
-7. To create permissions and roles, and add permissions to roles you can use the following code example:
+8. To create permissions and roles, and add permissions to roles you can use the following code example:
 ```php
 use Coyote6\LaravelPermissions\Models\Permissions;
 use Coyote6\LaravelPermissions\Models\Models;
@@ -59,7 +72,7 @@ $role->addPermission($permission);
 ```
 Or if using the coyote6/laravel-crud package, go to the a '/admin/users/permissions' and '/admin/users/roles' respectively on the site.
 
-8. Add permission code to policies:
+9. Optional: Add permission code to policies and/or use Policy Traits (see Policy Traits below):
 ```php 
 class ExamplePolicy {
 
@@ -92,7 +105,7 @@ class ExamplePolicy {
 	}
 }
 ```
-9. Add permission code as needed to templates via blade directives.
+10. Optional: Add permission code as needed to templates via blade directives.
 
 ## Blade Directives
 

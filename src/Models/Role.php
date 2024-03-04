@@ -33,6 +33,11 @@ class Role extends Model {
 	    'id',
 	    'name'
 	];
+	
+	public function __construct (array $attributes = []) {	
+		parent::__construct($attributes);
+		$this->table = config('permissions.tables.roles') ?: parent::getTable();
+	}
     
     
     public function permissions () {

@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePermissionsTable extends Migration
 {
+	
+	
+	public function getTableName ():string {
+		return config('permissions.tables.permissions', 'permissions');
+	}
+	
     /**
      * Run the migrations.
      *
@@ -13,7 +19,7 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create($this->getTableName(), function (Blueprint $table) {
             $table->string('id', 95)->primary();
             $table->string('name', 95)->unique();
         });
@@ -26,6 +32,6 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists($this->getTableName());
     }
 }

@@ -12,7 +12,6 @@ use Illuminate\Support\ServiceProvider;
 #use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate;
-use Livewire\Livewire;
 
 class PermissionsServiceProvider extends ServiceProvider {
 	
@@ -45,6 +44,7 @@ class PermissionsServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
+		$this->mergeConfigFrom (__DIR__ . '/../Resources/config/permissions.php', 'permissions');
 #		$this->loadViewsFrom (__DIR__ . '/../Resources/views', 'laravel-crud');
 #		$this->loadPoliciesFrom (__DIR__ . '/../Policies');
 	}
@@ -56,6 +56,10 @@ class PermissionsServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
+		
+		$this->publishes([
+			__DIR__ . '/../Resources/config/permissions.php' => config_path('permissions.php'),
+		], 'permissions');
 		
 		$this->registerPolicies();
 		$this->registerLivewireComponents();
@@ -81,8 +85,10 @@ class PermissionsServiceProvider extends ServiceProvider {
     
     
     protected function registerLivewireComponents () {
-        foreach ($this->livewireComponents as $name => $class) {
-		    Livewire::component('laravel-permissions::' . $name, 'Coyote6\LaravelPermissions\Http\Livewire\\' . $class);
+		if (class_exists ('Livewire\Livewire')) {
+        	foreach ($this->livewireComponents as $name => $class) {
+				\Livewire\Livewire::component('laravel-permissions::' . $name, 'Coyote6\LaravelPermissions\Http\Livewire\\' . $class);
+			}
 		}
     }
     
