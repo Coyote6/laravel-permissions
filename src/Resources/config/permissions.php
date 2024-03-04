@@ -7,7 +7,7 @@ return [
 		'roles' => 'roles',
 		'role-permissions' => 'role_permissions',
 		'user-roles' => 'user_roles',
-		'users' => 'users'
+		'users' => 'users'								// This needs to match your user table name
 	]
 
 ];

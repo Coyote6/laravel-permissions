@@ -6,12 +6,20 @@ A package for managing permissions and user roles.
 1. Install require coyote6/laravel-permissions
 2. Optional: publish config file if you wish to change database table names.
 
-Default names are:
-permissions
-roles
-role_permissions
-user_roles
-users 				// This needs to match your users table
+Default below:
+```php
+return [	
+	
+	'tables' => [
+		'permissions' => 'permissions',
+		'roles' => 'roles',
+		'role-permissions' => 'role_permissions',
+		'user-roles' => 'user_roles',
+		'users' => 'users'								// This needs to match your user table name
+	]
+
+];
+```
 
 ```
 php artisan vendor:publish --tag=permissions
