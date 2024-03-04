@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateRolePermissionsTable extends Migration {
 
 
-	public function getTableNames ():string {
+	public function getTableNames ():array {
 		return config('permissions.tables', 'role_permissions');
 	}
 	
@@ -18,7 +18,7 @@ class CreateRolePermissionsTable extends Migration {
 	 */
 	public function up() {
 		$tables = $this->getTableNames();
-		Schema::create($tables['role_permissions'], function (Blueprint $table) use ($tables) {
+		Schema::create($tables['role-permissions'], function (Blueprint $table) use ($tables) {
 			
 			$table->string('role_id', 95);
 			$table->string('permission_id',95);
@@ -38,7 +38,7 @@ class CreateRolePermissionsTable extends Migration {
 	 */
 	public function down() {
 		$tables = $this->getTableNames();
-		Schema::dropIfExists($tables['role_permissions']);
+		Schema::dropIfExists($tables['role-permissions']);
 	}
 
 }

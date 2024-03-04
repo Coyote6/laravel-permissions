@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUserRolesTable extends Migration {
 
-	public function getTableNames ():string {
+	public function getTableNames ():array {
 		return config('permissions.tables', 'user_roles');
 	}
 	
@@ -17,7 +17,7 @@ class CreateUserRolesTable extends Migration {
 	 */
 	public function up() {
 		$tables = $this->getTableNames();
-		Schema::create($tables['user_roles'], function (Blueprint $table) use ($tables) {
+		Schema::create($tables['user-roles'], function (Blueprint $table) use ($tables) {
 			
 			$table->uuid('user_id');
 			$table->string ('role_id', 95);
@@ -37,7 +37,7 @@ class CreateUserRolesTable extends Migration {
 	 */
 	public function down() {
 		$tables = $this->getTableNames();
-		Schema::dropIfExists($tables['user_roles']);
+		Schema::dropIfExists($tables['user-roles']);
 	}
 
 }
