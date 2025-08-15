@@ -94,7 +94,7 @@ class ExamplePolicy {
 		//
 		// Example using the machine name id for the permission
 		//
-		if ($user->hasPermission ('do_something')) {
+		if ($user->hasPermissionTo ('do_something')) {
 			return true;
 		}
 		return false;
@@ -106,7 +106,7 @@ class ExamplePolicy {
 		//
 		// Example using the name for the permission
 		//
-		if ($user->hasPermission ('Create Example', 'name')) {
+		if ($user->hasPermissionTo ('Create Example', 'name')) {
 			return true;
 		}
 		return false;

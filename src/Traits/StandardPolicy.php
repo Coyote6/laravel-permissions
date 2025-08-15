@@ -190,7 +190,7 @@ trait StandardPolicy {
 	//
 	
 	public function administer (User $user): bool {
-		if ($user->hasPermission ($this->getAdministerPrefix() . $this->getModelPermissionName())) {
+		if ($user->hasPermissionTo ($this->getAdministerPrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -198,7 +198,7 @@ trait StandardPolicy {
 	
 	
 	public function viewCrud (User $user): bool {
-		if ($this->administer ($user) || $user->hasPermission ($this->getAdministerPrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getAdministerPrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -206,7 +206,7 @@ trait StandardPolicy {
 	
 	
 	public function viewUserCrud (User $user): bool {
-		if ($this->administer ($user) || $user->hasPermission ($this->getViewPrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getViewPrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -214,7 +214,7 @@ trait StandardPolicy {
 	
 	
 	public function search (User $user): bool {
-		if ($this->administer ($user) || $user->hasPermission ($this->getSearchPrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getSearchPrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -230,7 +230,7 @@ trait StandardPolicy {
 			return false;
 		}
 		
-		if ($this->administer ($user) || $user->hasPermission ($this->getViewPrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getViewPrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -238,7 +238,7 @@ trait StandardPolicy {
 	
 	
 	public function create (User $user): bool {
-		if ($this->administer ($user) || $user->hasPermission ($this->getCreatePrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getCreatePrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -254,7 +254,7 @@ trait StandardPolicy {
 			return false;
 		}
 		
-		if ($this->administer ($user) || $user->hasPermission ($this->getUpdatePrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getUpdatePrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;
@@ -270,7 +270,7 @@ trait StandardPolicy {
 			return false;
 		}
 		
-		if ($this->administer ($user) || $user->hasPermission ($this->getDeletePrefix() . $this->getModelPermissionName())) {
+		if ($this->administer ($user) || $user->hasPermissionTo ($this->getDeletePrefix() . $this->getModelPermissionName())) {
 			return true;
 		}
 		return false;

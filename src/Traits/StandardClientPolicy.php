@@ -21,7 +21,7 @@ trait StandardClientPolicy {
 	public function administerClient (User $user): bool {
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ($this->getAdministerClientPrefix() . $this->getModelPermissionName())
+			$user->hasPermissionTo ($this->getAdministerClientPrefix() . $this->getModelPermissionName())
 		) {
 			return true;
 		}
@@ -32,7 +32,7 @@ trait StandardClientPolicy {
 	public function viewClientCrud (User $user): bool {
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ($this->getViewClientPrefix() . $this->getModelPermissionName())
+			$user->hasPermissionTo ($this->getViewClientPrefix() . $this->getModelPermissionName())
 		) {
 			return true;
 		}
@@ -43,7 +43,7 @@ trait StandardClientPolicy {
 	public function searchClient (User $user): bool {
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ($this->getSearchClientPrefix() . $this->getModelPermissionName())
+			$user->hasPermissionTo ($this->getSearchClientPrefix() . $this->getModelPermissionName())
 		) {
 			return true;
 		}
@@ -59,10 +59,10 @@ trait StandardClientPolicy {
 		
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ($this->getViewPrefix() . $this->getModelPermissionName()) ||
+			$user->hasPermissionTo ($this->getViewPrefix() . $this->getModelPermissionName()) ||
 			(
 				$this->isOwnedByClient ($user, $model) && 
-				$user->hasPermission ($this->getViewClientPrefix() . $this->getModelPermissionName())
+				$user->hasPermissionTo ($this->getViewClientPrefix() . $this->getModelPermissionName())
 			)
 		) {
 			return true;
@@ -79,10 +79,10 @@ trait StandardClientPolicy {
 		
 		if (
 			$this->administer ($user) ||
-			$user->hasPermission ($this->getUpdatePrefix() . $this->getModelPermissionName()) ||
+			$user->hasPermissionTo ($this->getUpdatePrefix() . $this->getModelPermissionName()) ||
 			(
 				$this->isOwnedByClient ($user, $model) && 
-				$user->hasPermission ($this->getUpdateClientPrefix() . $this->getModelPermissionName())
+				$user->hasPermissionTo ($this->getUpdateClientPrefix() . $this->getModelPermissionName())
 			)
 		 ) {
 			return true;
@@ -99,10 +99,10 @@ trait StandardClientPolicy {
 		
 		if (
 			$this->administer ($user) || 
-			$user->hasPermission ($this->getDeletePrefix() . $this->getModelPermissionName()) ||
+			$user->hasPermissionTo ($this->getDeletePrefix() . $this->getModelPermissionName()) ||
 			(
 				$this->isOwnedByClient ($user, $model) && 
-				$user->hasPermission ($this->getDeleteClientPrefix() . $this->getModelPermissionName())
+				$user->hasPermissionTo ($this->getDeleteClientPrefix() . $this->getModelPermissionName())
 			)
 		) {
 			return true;

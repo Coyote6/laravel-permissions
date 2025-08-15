@@ -14,7 +14,7 @@ class RolePolicy extends BasePolicy {
 	
 	
 	public function viewCrud (User $user) {
-		if ($user->hasPermission ('access roles admin page')) {
+		if ($user->hasPermissionTo ('access roles admin page')) {
 			return true;
 		}
 		return false;
@@ -23,7 +23,7 @@ class RolePolicy extends BasePolicy {
 	
 	
 	public function view (User $user, Role $role) {
-		if ($user->hasPermission ('view any role')) {
+		if ($user->hasPermissionTo ('view any role')) {
 			return true;
 		}
 		return false;
@@ -31,7 +31,7 @@ class RolePolicy extends BasePolicy {
 	
 	
 	public function create (User $user) {
-		if ($user->hasPermission ('create role')) {
+		if ($user->hasPermissionTo ('create role')) {
 			return true;
 		}
 		return false;
@@ -39,7 +39,7 @@ class RolePolicy extends BasePolicy {
 	
 	
 	public function update (User $user, Role $role) {
-		if ($user->hasPermission ('edit any role')) {
+		if ($user->hasPermissionTo ('edit any role')) {
 			return true;
 		}
 		//    if ($user->hasPermission ('edit own role') && $user->role_id == $role->owner_id) {
@@ -50,7 +50,7 @@ class RolePolicy extends BasePolicy {
 	
 	
 	public function delete (User $user, Role $role) {
-		if ($user->hasPermission ('delete any role')) {
+		if ($user->hasPermissionTo ('delete any role')) {
 			return true;
 		}
 		return false;

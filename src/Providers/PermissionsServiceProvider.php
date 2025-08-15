@@ -103,7 +103,7 @@ class PermissionsServiceProvider extends ServiceProvider {
 			}
 			else {
 				foreach (explode('|', $permissions) as $p) {
-					if ($user && $user->hasPermission(trim($p))) {
+					if ($user && $user->hasPermissionTo(trim($p))) {
 						$authorized = true;
 						break;
 					}
@@ -146,7 +146,7 @@ class PermissionsServiceProvider extends ServiceProvider {
 			}
 			else {
 				foreach (explode('|', $permissions) as $p) {
-					if ($user && $user->hasPermission(trim($p))) {
+					if ($user && $user->hasPermissionTo(trim($p))) {
 						$authorized = true;
 						break;
 					}
@@ -176,7 +176,7 @@ class PermissionsServiceProvider extends ServiceProvider {
 			}
 			else {
 				foreach (explode('|', $editPermissions) as $p) {
-					if ($user && $user->hasPermission(trim($p))) {
+					if ($user && $user->hasPermissionTo(trim($p))) {
 						$editAuthorized = true;
 						break;
 					}
@@ -190,7 +190,7 @@ class PermissionsServiceProvider extends ServiceProvider {
 			}
 			else {
 				foreach (explode('|', $permissions) as $p) {
-					if ($user && $user->hasPermission(trim($p))) {
+					if ($user && $user->hasPermissionTo(trim($p))) {
 						$authorized = true;
 						break;
 					}

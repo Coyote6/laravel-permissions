@@ -16,7 +16,7 @@ class PermissionPolicy extends BasePolicy {
 	
 	
 	public function viewCrud (User $user) {
-		if ($user->hasPermission ('access permissions admin page')) {
+		if ($user->hasPermissionTo ('access permissions admin page')) {
 			return true;
 		}
 		return false;
@@ -25,7 +25,7 @@ class PermissionPolicy extends BasePolicy {
 	
 	
 	public function view (User $user, Permission $permission) {
-		if ($user->hasPermission ('view any permission')) {
+		if ($user->hasPermissionTo ('view any permission')) {
 			return true;
 		}
 		return false;
@@ -33,7 +33,7 @@ class PermissionPolicy extends BasePolicy {
 	
 	
 	public function create (User $user) {
-		if ($user->hasPermission ('create permission')) {
+		if ($user->hasPermissionTo ('create permission')) {
 			return true;
 		}
 		return false;
@@ -41,7 +41,7 @@ class PermissionPolicy extends BasePolicy {
 	
 	
 	public function update (User $user, Permission $permission) {
-		if ($user->hasPermission ('edit any permission')) {
+		if ($user->hasPermissionTo ('edit any permission')) {
 			return true;
 		}
 		//    if ($user->hasPermission ('edit own permission') && $user->permission_id == $permission->owner_id) {
@@ -52,7 +52,7 @@ class PermissionPolicy extends BasePolicy {
 	
 	
 	public function delete (User $user, Permission $permission) {
-		if ($user->hasPermission ('delete any permission')) {
+		if ($user->hasPermissionTo ('delete any permission')) {
 			return true;
 		}
 		return false;
